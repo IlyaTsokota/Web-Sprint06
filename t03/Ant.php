@@ -1,50 +1,33 @@
-<?
+<?php 
 
-class Ant
-{
+class Ant {
     public $name;
     public $role_in_army;
-    public $date_of_entry;
     public $number_of_fights;
     public $number_of_legs;
+    public $date_fo_entry;
 
-    public function __construct($name, $role_in_army, $date_of_entry, $number_of_fights, $number_of_legs)
-    {
+    function __construct($name, $role_in_army, $date_fo_entry, $number_of_fights, $number_of_legs){
         $this->name = $name;
         $this->role_in_army = $role_in_army;
-        $this->date_of_entry = $date_of_entry;
+        $this->date_fo_entry = $date_fo_entry;
         $this->number_of_fights = $number_of_fights;
         $this->number_of_legs = $number_of_legs;
     }
 
-    public function __serialize()
-    {
-        return [
-            'name' => $this->name,
-            'role_in_army' => $this->role_in_army,
-            'date_of_entry' => $this->date_of_entry,
-            'number_of_fights' => $this->number_of_fights,
-            'number_of_legs' => $this->number_of_legs,
-        ];
-    }
 
-    private function connect()
-    {
-        return "";
-    }
-
-    public function __unserialize($data)
-    {
-
-        $this->name = $data['name'];
-        $this->role_in_army = $data['role_in_army'];
-        $this->date_of_entry = $data['date_of_entry'];
-        $this->number_of_fights = $data['number_of_fights'];
-        $this->number_of_legs = $data['number_of_legs'];
-        return $this->connect();
+    public function __wakeup() {
+        error_reporting(0);
+        echo "name: " . $this->name . "\n";
+        echo "role_in_army: " . $this->role_in_army . "\n";
+        echo "date_fo_entry: " . $this->date_fo_entry . "\n";
+        echo "number_of_fight: " . $this->number_of_fights . "\n";
+        echo "number_of_legs: " . $this->number_of_legs . "\n";
     }
 
 }
+
+
 
 $ant = new Ant("Anthony", "sergeant", "2015-07-16", 1, 4);
 $serialized = serialize($ant);
